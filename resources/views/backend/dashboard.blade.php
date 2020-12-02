@@ -10,6 +10,7 @@
                     <strong>@lang('strings.backend.dashboard.welcome') {{ $logged_in_user->name }}!</strong>
                 </div><!--card-header-->
                 <div class="card-body">
+                    test
                     {!! __('strings.backend.welcome') !!}
                 </div><!--card-body-->
             </div><!--card-->
