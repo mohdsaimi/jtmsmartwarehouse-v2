@@ -4,15 +4,16 @@
 
 @section('content')
 
-<form method="POST" action="{{ route('admin.storesyssld') }}">
+<form method="POST" action="{{ route('admin.updatesyssld', $syssld) }}">
     <div class="form-group">
         @csrf
+        @method('PATCH')
     <div class="card">
         <div class="card-body">
             <div class="row">
                 <div class="col-sm-5">
                     <h4 class="card-title mb-0">
-                        Tambah SLDS Baru
+                        Edit SLDS
                     </h4>
                 </div><!--col-->
             </div><!--row-->
@@ -25,15 +26,15 @@
                     <div class="form-group row">
                         <label class="col-md-2 col-form-label">Kod Stok</label>
                         <div class="col-md-2">
-                            <input type="hidden" name="stok_id" value="{{ $lokasistok->stok->id }}">
+                            {{-- <input type="hidden" name="stok_id" value="{{ $lokasistok->stok->id }}">
                             <input type="hidden" name="device_id" value="{{ $lokasistok->device->id }}">
-                            <input type="hidden" name="petak" value="{{ $lokasistok->petak }}">
-                            <p class="mt-2"><b>{{ $lokasistok->stok->fullcode }}</b></p>
+                            <input type="hidden" name="petak" value="{{ $lokasistok->petak }}"> --}}
+                            <p class="mt-2"><b>{{ $syssld->stok->fullcode }}</b></p>
                         </div><!--col-->
 
                         <label class="col-md-2 col-form-label">Nama Stok</label>
                         <div class="col-md-6">
-                            <p class="mt-1"><b>{{ $lokasistok->stok->stok_desc }}</b></p>
+                            <p class="mt-1"><b>{{ $syssld->stok->stok_desc }}</b></p>
                         </div><!--col-->
 
                     </div><!--form-group-->
@@ -41,11 +42,11 @@
                     <div class="form-group row">
                         <label class="col-md-2 col-form-label">Kod IOT</label>
                         <div class="col-md-2">
-                            <p class="mt-2"><b>{{ $lokasistok->device->kod_IOT }}</b></p>
+                            <p class="mt-2"><b>{{ $syssld->device->kod_IOT }}</b></p>
                         </div><!--col-->
                         <label class="col-md-1 col-form-label">Petak</label>
                         <div class="col-md-2">
-                            <p class="mt-2"><b>{{ $lokasistok->petak }}</b></p>
+                            <p class="mt-2"><b>{{ $syssld->petak }}</b></p>
                         </div><!--col-->
 
                     </div><!--form-group-->
@@ -55,6 +56,7 @@
                         <div class="col-md-4">
 
                             <select class="form-control" name="pengguna">
+                                <option value="{{ $syssld->pengguna}}">Pengguna {{ $syssld->pengguna}}</option>
                                 <option value="0">Sila Pilih</option>
                                 <option value="1">Pengguna 1</option>
                                 <option value="2">Pengguna 2</option>
@@ -75,7 +77,7 @@
                     <div class="form-group row">
                         <label class="col-md-2 col-form-label">Kuantiti</label>
                         <div class="col-md-4">
-                            <input type="number" class="form-control" id="kuantiti" name="kuantiti" placeholder="Masukkan kuantiti yang dipohon" required>
+                            <input type="number" class="form-control" id="kuantiti" name="kuantiti" value="{{ $syssld->kuantiti}}" required>
                         </div><!--col-->
 
                     </div><!--form-group-->
@@ -92,7 +94,7 @@
                 </div><!--col-->
 
                 <div class="col text-right">
-                    {{ form_submit(__('buttons.general.crud.create')) }}
+                    {{ form_submit(__('buttons.general.crud.update')) }}
                 </div><!--col-->
             </div><!--row-->
         </div><!--card-footer-->

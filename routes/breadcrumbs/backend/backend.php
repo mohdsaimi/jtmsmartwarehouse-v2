@@ -55,9 +55,13 @@ Breadcrumbs::for('admin.editlokasistok', function ($trail,$id) {
 });
 
 Breadcrumbs::for('admin.syssld', function ($trail) {
-    $trail->push('Stock Location Display System', route('admin.syssld'));
+    $trail->push('Stock Location Display (SLD) System', route('admin.syssld'));
 });
 Breadcrumbs::for('admin.createsyssld', function ($trail, $id) {
     $trail->parent('admin.syssld');
     $trail->push('Tambah SLDS Baru', route('admin.createsyssld', $id));
+});
+Breadcrumbs::for('admin.editsyssld', function ($trail,$id) {
+    $trail->parent('admin.syssld');
+    $trail->push('Edit SLDS', route('admin.editsyssld', $id));
 });

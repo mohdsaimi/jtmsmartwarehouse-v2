@@ -6,13 +6,13 @@
 <div class="card">
     <div class="card-body">
         <div class="row">
-            <div class="col-sm-5">
+            <div class="col-sm-6">
                 <h4 class="card-title mb-0">
-                    Stock Location Display System {{today()->format('d-m-Y')}}
+                    Stock Location Display (SLD) System {{today()->format('d-m-Y')}}
                 </h4>
             </div><!--col-->
 
-            <div class="col-sm-7 pull-right">
+            <div class="col-sm-6 pull-right">
 
                 <div class="btn-toolbar float-right" lokasistoks="toolbar" aria-label="@lang('labels.general.toolbar_btn_groups')">
                     <a href="{{ route('admin.lokasistok') }}" class="btn btn-success ml-1" data-toggle="tooltip" title="@lang('labels.general.create_new')"><i class="fas fa-plus-circle"></i></a>
@@ -66,16 +66,16 @@
 
                                 <tr>
                                     <td>{{ ++$i }}</td>
-                                    <td>{{ $sysslds->device_id }}</td>
-                                    <td>{{-- {{ $syssld ?? '' ?? ''->stok->stok_desc ?? null }} --}}</td>
-                                    <td class="text-center">{{-- {{ $syssld ?? '' ?? ''->device->kod_IOT ?? null}} --}}</td>
-                                    <td class="text-center">{{-- {{ $lokasistok->petak ?? null}} --}}</td>
+                                    <td>{{ $sysslds->stok->fullcode }}</td>
+                                    <td>{{ $sysslds->stok->stok_desc }}</td>
+                                    <td class="text-center">{{ $sysslds->pengguna }}</td>
+                                    <td class="text-center">{{ $sysslds->kuantiti }}</td>
                                     <td>
 
                                         {{-- butang --}}
                                         <div class="btn-group btn-group-sm" syssld="group" aria-label="@lang('labels.backend.access.users.user_actions')">
 
-                                            <a href="{{-- {{ route('admin.editlokasistok',$lokasistok) }} --}}" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="@lang('buttons.general.crud.edit')">
+                                            <a href="{{ route('admin.editsyssld',$sysslds) }}" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="@lang('buttons.general.crud.edit')">
                                                 <i class="fas fa-edit"></i>
                                             </a>
 
@@ -100,7 +100,7 @@
                             @endforeach
                         </tbody>
                     </table>
-                    {{-- {{$stoks->appends(['term' => request('term'),'inputState' => request('inputState')])->links()}} --}}
+                    {{$syssld->links()}}
                 </div>
             </div><!--col-->
         </div><!--row-->

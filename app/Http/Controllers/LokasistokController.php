@@ -176,8 +176,8 @@ class LokasistokController extends Controller
         //
         return view('backend.editlokasistok')
             ->withLokasistok($lokasistok)
-            ->withDevice(Devices::where('institut_id',auth()->user()->institut_id)->get())
-            ->withStok(Stoks::all());
+            ->withDevice(Devices::where('institut_id',auth()->user()->institut_id)->get());
+            /* ->withStok(Stoks::all()); */
     }
 
     /**

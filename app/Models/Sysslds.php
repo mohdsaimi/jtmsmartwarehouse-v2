@@ -35,4 +35,9 @@ class Sysslds extends Model
         return $this->belongsTo('App\Models\Lokasistoks');
     }
 
+    public function device()
+    {
+        return $this->belongsTo('App\Models\Devices');
+    }
+
 }

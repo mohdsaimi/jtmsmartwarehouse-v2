@@ -50,6 +50,8 @@ Route::delete('destroylokasistok/{lokasistok}', [LokasistokController::class, 'd
 Route::get('syssld', [SyssldController::class, 'index'])->name('syssld');
 Route::get('createsyssld/{lokasistok}', [SyssldController::class, 'create'])->name('createsyssld');
 Route::post('createsyssld', [SyssldController::class, 'store'])->name('storesyssld');
+Route::get('editsyssld/{syssld}', [SyssldController::class, 'edit'])->name('editsyssld');
+Route::patch('updatesyssld/{syssld}', [SyssldController::class, 'update'])->name('updatesyssld');
 
 Route::resource('stoks', StokController::class);
 Route::resource('devices', DeviceController::class);

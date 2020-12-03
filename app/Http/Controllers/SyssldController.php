@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Stoks;
 use App\Models\Devices;
 use App\Models\Sysslds;
 use App\Models\Lokasistoks;
@@ -18,18 +19,13 @@ class SyssldController extends Controller
     public function index()
     {
         //
-        /* $syssld = Sysslds::where('institut_id',auth()->user()->institut_id);
-
-        return view('backend.syssld', compact('syssld'))
-            /* ->with($syssld) ; */
-
         $syssld = Sysslds::where('institut_id',auth()->user()->institut_id)
             ->whereDate('created_at', Carbon::today())
             /* ->latest() */
-            ->orderBy('pengguna','ASC')->paginate(5);
+            ->orderBy('pengguna','ASC')->paginate(25);
 
         return view('backend.syssld', compact('syssld'))
-            ->with('i', (request()->input('page', 1) - 1) * 5);
+            ->with('i', (request()->input('page', 1) - 1) * 25);
 
 
     }
@@ -57,6 +53,33 @@ class SyssldController extends Controller
     public function store(Request $request)
     {
         //
+
+        if($this->check_stok_pengguna($request->device_id,$request->pengguna) > 0){
+            return redirect()->back()->withFlashDanger(__('Stok telah wujud'));
+        }
+
+        $syssld = new Sysslds();
+        $syssld->pengguna = $request->pengguna;
+        $syssld->stok_id = $request->stok_id;
+        $syssld->device_id = $request->device_id;
+        $syssld->petak = $request->petak;
+        $syssld->kuantiti = $request->kuantiti;
+        $syssld->institut_id = auth()->user()->institut_id;
+
+        if($syssld->save()){
+            return redirect()->route('admin.syssld')
+            ->withFlashSuccess(__('SLDS telah berjaya disimpan.'));
+        }
+        else{
+            return redirect()->back()->withFlashDanger(__('SLDS gagal disimpan'));
+        }
+    }
+
+    public function check_stok_pengguna($device_id,$pengguna){
+        return Sysslds::where('device_id',$device_id)
+            ->where('pengguna',$pengguna)
+            ->where('created_at',today())
+            ->count();
     }
 
     /**
@@ -79,6 +102,11 @@ class SyssldController extends Controller
     public function edit(Sysslds $syssld)
     {
         //
+        return view('backend.editsyssld')
+            ->withSyssld($syssld);
+            /* ->withDevice(Devices::where('institut_id',auth()->user()->institut_id)->get())
+            ->withLokasistok(Lokasistoks::all())
+            ->withStok(Stoks::all()); */
     }
 
     /**
@@ -91,6 +119,17 @@ class SyssldController extends Controller
     public function update(Request $request, Sysslds $syssld)
     {
         //
+        $updateData = $request->validate([
+            'pengguna' => 'required',
+            'kuantiti' => 'required'
+        ]);
+
+       /*  return $request->pengguna; */
+
+        Sysslds::whereId($syssld->id)->update($updateData);
+
+        return redirect()->route('admin.syssld')->withFlashSuccess(__('SLDS berjaya dikemaskini.'));
+
     }
 
     /**
