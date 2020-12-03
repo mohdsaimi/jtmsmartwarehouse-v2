@@ -53,6 +53,11 @@ class SyssldController extends Controller
     public function store(Request $request)
     {
         //
+        if($this->check_stok_ins($request->device_id) > 0){
+            //do noting
+        }else{
+            return redirect()->back()->withFlashDanger(__('Stok tiada di institut!'));
+        }
 
         if($this->check_stok_pengguna($request->device_id,$request->pengguna) > 0){
             return redirect()->back()->withFlashDanger(__('Stok telah wujud'));
@@ -79,6 +84,12 @@ class SyssldController extends Controller
         return Sysslds::where('device_id',$device_id)
             ->where('pengguna',$pengguna)
             ->where('created_at',today())
+            ->count();
+    }
+
+    public function check_stok_ins($device_id){
+        return Lokasistoks::where('device_id',$device_id)
+            ->where('institut_id',auth()->user()->institut_id)
             ->count();
     }
 
@@ -141,5 +152,8 @@ class SyssldController extends Controller
     public function destroy(Sysslds $syssld)
     {
         //
+        $syssld->delete();
+
+        return redirect()->route('admin.syssld')->withFlashSuccess(__('SLDS berjaya dipadam.'));
     }
 }

@@ -79,7 +79,7 @@
                                                 <i class="fas fa-edit"></i>
                                             </a>
 
-                                            <a href="{{-- {{ route('admin.destroylokasistok', $lokasistok) }} --}}"
+                                            <a href="{{ route('admin.destroysyssld', $sysslds) }}"
                                                data-method="delete"
                                                data-trans-button-cancel="@lang('buttons.general.cancel')"
                                                data-trans-button-confirm="@lang('buttons.general.crud.delete')"

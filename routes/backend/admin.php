@@ -52,6 +52,7 @@ Route::get('createsyssld/{lokasistok}', [SyssldController::class, 'create'])->na
 Route::post('createsyssld', [SyssldController::class, 'store'])->name('storesyssld');
 Route::get('editsyssld/{syssld}', [SyssldController::class, 'edit'])->name('editsyssld');
 Route::patch('updatesyssld/{syssld}', [SyssldController::class, 'update'])->name('updatesyssld');
+Route::delete('destroysyssld/{syssld}', [SyssldController::class, 'destroy'])->name('destroysyssld');
 
 Route::resource('stoks', StokController::class);
 Route::resource('devices', DeviceController::class);
