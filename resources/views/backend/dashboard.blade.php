@@ -35,6 +35,24 @@
                 </div><!--card-body-->
             </div><!--card-->
         </div><!--col-->
+
+        <div class="col">
+            <div class="card">
+                <div class="card-header">
+                    <strong>Stock Location Display System (SLDS) {{today()->format('d-m-Y')}}</strong>
+                </div><!--card-header-->
+                <div class="card-body">
+
+                    <div class="card-body">
+                        <p><b style="font-size:20px">{{$syssldall ?? ''}}</b> item stok
+                        <br><b style="font-size:20px">{{$syssld ?? ''}}</b> item stok di institut anda</p>
+                    </div><!--card-body-->
+
+
+                </div><!--card-body-->
+            </div><!--card-->
+        </div><!--col-->
+
     </div><!--row-->
 @endsection
 
