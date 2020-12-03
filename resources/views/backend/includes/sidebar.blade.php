@@ -29,9 +29,9 @@
                             }}" href="{{ route('admin.stok') }}">
                                 Senarai Nama Stok
                             </a>
-                        {{-- </li>
+                        </li>
 
-                        <li class="nav-item"> --}}
+                        <li class="nav-item">
                             @role('administrator')
                             <a class="nav-link {{
                                 active_class(Route::is('admin/device'))
@@ -39,13 +39,17 @@
                                 Senarai Peranti IOT Stok
                             </a>
                             @endrole
+                        </li>
 
+                        <li class="nav-item">
                             <a class="nav-link {{
                                 active_class(Route::is('admin/lokasistok'))
                             }}" href="{{ route('admin.lokasistok') }}">
                                 Senarai Lokasi Stok
                             </a>
+                        </li>
 
+                        <li class="nav-item">
                             <a class="nav-link {{
                                 active_class(Route::is('admin/syssld'))
                             }}" href="{{ route('admin.syssld') }}">
